@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  backend:
+    build: ./backend
+    image: disaster-backend:latest
+    container_name: disaster-backend
+    environment:
+      - ENDPOINT=primary_hostname:port
+      - DBNAME=your_db_name
+      - REPLICASET=replica_set_name
+    env_file: ./.env
+    ports:
+      - 5000:5000
+
+  frontend:
+    build: ./frontend
+    image: disaster-frontend:latest
+    container_name: disaster-frontend
+    ports:
+    - 8080:8080
+    - 8443:8443
